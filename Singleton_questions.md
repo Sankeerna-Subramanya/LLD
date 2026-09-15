@@ -30,6 +30,7 @@ C++
 `
 ptr = ::new (custom_memory_address) Logger();
 `
+
 A local static reference (static Logger instance;) defaults to standard stack/static storage segment layout and cannot easily be diverted into an arbitrary raw memory buffer or IPC shared region.
 
 4. Delayed Poly-type Instantiation (Polymorphic Singletons)
@@ -39,7 +40,8 @@ Why Pointers Fix It: A static reference forces a fixed type at compile time (sta
 
 C++
 `
-static ILogger* getInstance() {
+static ILogger* getInstance() 
+{
     // Determines subtype dynamically at runtime
     if (config == "file") instance = new FileLogger();
     else instance = new NetworkLogger();
