@@ -26,10 +26,10 @@ The Scenario: In low-latency systems (e.g., storage drivers or HFT engines), sta
 
 Why Pointers Fix It: A pointer allows you to use placement new or custom allocators:
 
-C++
-`
+
+```
 ptr = ::new (custom_memory_address) Logger();
-`
+```
 
 A local static reference (static Logger instance;) defaults to standard stack/static storage segment layout and cannot easily be diverted into an arbitrary raw memory buffer or IPC shared region.
 
@@ -38,8 +38,8 @@ The Scenario: You need the getInstance() function to return an abstract interfac
 
 Why Pointers Fix It: A static reference forces a fixed type at compile time (static ConcreteLogger instance). A pointer allows runtime subtyping:
 
-C++
-`
+
+```
 static ILogger* getInstance() 
 {
     // Determines subtype dynamically at runtime
@@ -47,6 +47,6 @@ static ILogger* getInstance()
     else instance = new NetworkLogger();
     return instance; // Returns ILogger*
 }   
-`
+```
 	  
 	 
