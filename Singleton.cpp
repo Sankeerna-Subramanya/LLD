@@ -12,10 +12,10 @@ class Logger{
    static mutex m;
    Logger() = default;
    ~Logger() = default;
-   Logger(const Logger&) = delete;
-   Logger& operator=(const Logger&) = delete;
-   Logger(Logger&&) = delete;
-   Logger& operator=(Logger&&) = delete;
+   Logger(const Logger&) = delete; // delete copy constructor
+   Logger& operator=(const Logger&) = delete; // delete assignment operator
+   Logger(Logger&&) = delete; // delete move constructor
+   Logger& operator=(Logger&&) = delete; // delete move assignment operator
 
    public:
    static Logger* getInstance()
@@ -27,16 +27,19 @@ class Logger{
        ptr = instance.load(memory_order_relaxed);
        if(ptr == nullptr)
       {
-	ptr = new Logger();
+		ptr = new Logger();
         instance.store(ptr,memory_order_release);
-	atexit(Logger::cleanup);
+		atexit(Logger::cleanup);
       }
      }
         return ptr;
    } 
+
    static void cleanup() { 
         Logger* ptr = instance.exchange(nullptr);
-	delete instance; } 
+		delete instance; 
+   } 
+
    void log(string msg)
    {
 	cout << "Printing the message" << msg << endl;
