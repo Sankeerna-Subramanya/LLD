@@ -33,7 +33,7 @@ ptr = ::new (custom_memory_address) Logger();
 
 A local static reference (static Logger instance;) defaults to standard stack/static storage segment layout and cannot easily be diverted into an arbitrary raw memory buffer or IPC shared region.
 
-4. Delayed Poly-type Instantiation (Polymorphic Singletons)
+4. **Delayed Poly-type Instantiation (Polymorphic Singletons)**
 The Scenario: You need the getInstance() function to return an abstract interface pointer (ILogger*), but the concrete implementation class (FileLogger, ConsoleLogger, NetworkLogger) is chosen at runtime based on environment variables or config settings.
 
 Why Pointers Fix It: A static reference forces a fixed type at compile time (static ConcreteLogger instance). A pointer allows runtime subtyping:
