@@ -1,7 +1,8 @@
 Questions that might arise are 
 
-
-***You absolutely need a pointer-based Singleton (Logger* instance)—and Meyers' static reference (static Logger instance) will fail—in 4 concrete production scenarios:
+***
+Why do you need new Logger() instead of Meyer's reference instance (static Logger instance)?
+You absolutely need a pointer-based Singleton (Logger* instance)—and Meyers' static reference (static Logger instance) will fail—in 4 concrete production scenarios:
 ***
 1. Lifetime Exceeds main() (Destruction Order Dependency)
 The Scenario: Static objects in C++ are destroyed in the exact reverse order of their construction after main() exits. If Logger is a static local reference, its destructor runs during program termination.
