@@ -7,12 +7,16 @@ Use atexit(cleanup) in the getinstance function
 
 How it Ensures Destruction Under the Hood
 When you register a proper cleanup function with the operating system's exit handlers, the lifecycle follows a strict sequence:
+
 **Step A: Registration**
 During the application's runtime (usually right when the Singleton is initialized for the first time), the codebase explicitly registers a cleanup function with the environment's exit stack.
+
 **Step B: Program Termination**
 When the program finishes its execution—either by reaching the end of the main() function, calling exit(), or encountering a standard termination signal—the runtime environment halts normal execution.
+
 **Step C: Execution of the Exit Stack**
 Before the operating system completely wipes the application's process from RAM, the runtime triggers all handlers registered via atexit in Reverse Order of Registration (Last In, First Out).
+
 **Step D: De-allocation of the Instance**
 The cleanup function runs, targets the global or static pointer holding your Singleton instance, and deletes it.
 
