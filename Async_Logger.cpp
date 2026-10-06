@@ -25,9 +25,9 @@ class Logger{
        ptr = instance.load(memory_order_relaxed);
        if(instance == nullptr)
       {
-	ptr = new Logger();
+		ptr = new Logger();
         instance.store(ptr,memory_order_release);
-	atexit(Logger::cleanup);
+		atexit(Logger::cleanup);
       }
      }
         return ptr;
